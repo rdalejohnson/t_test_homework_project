@@ -1,6 +1,11 @@
 library(plyr)
 library(tidyverse)
 
+#REFERENCES:
+# https://www.sheffield.ac.uk/polopoly_fs/1.579191!/file/stcp-karadimitriou-normalR.pdf
+# https://www.statsandr.com/blog/do-my-data-follow-a-normal-distribution-a-note-on-the-most-widely-used-distribution-and-how-to-test-for-normality-in-r/
+# https://statistics.berkeley.edu/computing/r-t-tests
+
 #Two Questions
 #1 
 #Whether the youths (n=100) in the NLYS97 had a statistically
@@ -37,7 +42,9 @@ nylsData <- nylsData %>%
 plyr::count(nylsData, 'SubAbuseDelta')
 
 
-hitsgram=hist(nylsData$SubAbuseDelta  , main="a histogram of the difference",) 
+hitsgram=hist(nylsData$SubAbuseDelta  , main="a histogram of the difference") 
+
+plot(density(nylsData$SubAbuseDelta, na.rm=TRUE))
 
 summary(nylsData$SubAbuseDelta)
 
@@ -46,8 +53,13 @@ subAbuseMean = mean(nylsData$SubAbuseDelta  ,na.rm=TRUE)
 
 ks.test(x= nylsData$SubAbuseDelta,"pnorm",mean=subAbuseMean,sd=subAbuseStDev)
 
+shapiro.test(nylsData$SubAbuseDelta)
+
 qqnorm(nylsData$SubAbuseDelta)
 qqline(nylsData$SubAbuseDelta)
+
+library(ggpubr)
+ggqqplot(nylsData$SubAbuseDelta)
 
 drinking_problem_score_plot <-
   boxplot(nylsData$SubAbuseDelta,

@@ -47,6 +47,10 @@ sd(Government$Pro_government_Attitudes,na.rm=TRUE)
 ## [1] 3.367521
 ks.test(x=Government$Pro_government_Attitudes,"pnorm",mean=24.00476,sd=3.367521)
 
+#Line added by Dale:
+shapiro.test(Government$Pro_government_Attitudes)
+
+
 ########################################################################################
 ## Warning in ks.test(x = Government$Pro_government_Attitudes, "pnorm", mean =
 ## 24.00476, : ties should not be present for the Kolmogorov-Smirnov test
