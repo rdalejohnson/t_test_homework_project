@@ -67,7 +67,7 @@ drinking_problem_score_plot <-
           xlab = "Summarized Scores for 1120 Students",
           col = "orange",
           border = "brown",
-          horizontal = TRUE,
+          #horizontal = TRUE,
           notch = TRUE)
 
 drinking_problem_score_plot
