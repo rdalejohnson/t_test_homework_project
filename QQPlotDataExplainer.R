@@ -2,7 +2,7 @@ library(plyr)
 library(tidyverse)
 
 # http://seankross.com/2016/02/29/A-Q-Q-Plot-Dissection-Kit.html
-par(mfrow = c(1, 1))
+par(mfrow = c(1, 2))
 
 #distribution="norm",
 qnorm.quantile <- function(x, ndx) {
@@ -10,7 +10,7 @@ qnorm.quantile <- function(x, ndx) {
 }
 
 x <- c(-15, 1, 5, 4, 2, 9, 0, -3.28,  -3, 4, 7, 12, 8, -1.5, 2.8, -0.5, 19.33)
-x <- c(7.19, 6.31, 5.89, 4.5, 3.77, 4.25, 5.19, 5.79, 6.79)
+x <- c(7.19, 6.31, 5.89, 4.5, 3.77, 4.25, 5.19, 4.5, 5.79, 6.79)
 #x
 
 #x <- c(1.71, 1.78, 2.36, 1.95, 2.59, 1.76, 2.05, 1.52, 1.87, 1.89)
@@ -23,12 +23,11 @@ qqnorm(x)
 qqline(x)
 
 
-#hist_ <- function(x, ...){
-#  hist(x, breaks = 30, xlab = "Z", ylab = "",  yaxt='n', freq = FALSE, ...)
-#  lines(zs, normal_density, type = "l", col = "red", lwd = 2)
-#}
+#h <- hist(x,ylim=c(0,5), breaks=20)
 
-#hist_(x, main = "Gaussian Distribution")
+
+
+#text(h$mids,h$counts,labels=h$counts, adj=c(0.5, -0.5))
 
 
 summaryStats <- summary(x)
@@ -43,7 +42,10 @@ for (ndx in 1:length(x)){
 }
 
 
+plot(y, x,,type="l",col="red")
 
+
+#lines(x,y2,col="green")
 
 
 ####################################################
