@@ -2,6 +2,8 @@ library(plyr)
 library(tidyverse)
 
 # http://seankross.com/2016/02/29/A-Q-Q-Plot-Dissection-Kit.html
+#https://stackoverflow.com/questions/2564258/plot-two-graphs-in-same-plot-in-r
+
 par(mfrow = c(1, 2))
 
 #distribution="norm",

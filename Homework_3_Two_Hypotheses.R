@@ -5,6 +5,8 @@ library(tidyverse)
 # https://www.sheffield.ac.uk/polopoly_fs/1.579191!/file/stcp-karadimitriou-normalR.pdf
 # https://www.statsandr.com/blog/do-my-data-follow-a-normal-distribution-a-note-on-the-most-widely-used-distribution-and-how-to-test-for-normality-in-r/
 # https://statistics.berkeley.edu/computing/r-t-tests
+# http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/76-add-p-values-and-significance-levels-to-ggplots/
+
 
 #Two Questions
 #1 
@@ -42,7 +44,7 @@ nylsData <- nylsData %>%
 plyr::count(nylsData, 'SubAbuseDelta')
 
 
-hitsgram=hist(nylsData$SubAbuseDelta  , main="a histogram of the difference") 
+histgram.delta=hist(nylsData$SubAbuseDelta  , main="a histogram of the difference") 
 
 plot(density(nylsData$SubAbuseDelta, na.rm=TRUE))
 
@@ -63,12 +65,13 @@ ggqqplot(nylsData$SubAbuseDelta)
 
 drinking_problem_score_plot <-
   boxplot(nylsData$SubAbuseDelta,
-          main = "Drinking Problem Scores (10 item questionnaire)",
-          xlab = "Summarized Scores for 1120 Students",
+          main = "NLYS97 Score Differences between 1997 and 2000",
+          xlab = "Score Differences (change between 1997 and 2000",
           col = "orange",
-          border = "brown",
+          border = "brown"
           #horizontal = TRUE,
-          notch = TRUE)
+          #notch = TRUE
+          )
 
 drinking_problem_score_plot
 
