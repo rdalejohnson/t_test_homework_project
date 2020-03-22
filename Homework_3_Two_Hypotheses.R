@@ -45,13 +45,27 @@ subAbuse1997StDev = sd(nylsData$Substance1997  ,na.rm=TRUE)
 print (paste("1997 NLSY97 Substance Use Index Score Mean: ", subAbuse1997Mean))
 print (paste("1997 NLSY97 Substance Use Index Score St. Dev: ", subAbuse1997StDev))
 summary(nylsData$Substance1997)
+plyr::count(nylsData, 'Substance1997')
+drinking_problem_score_plot <-
+  boxplot(nylsData$Substance1997,
+          main = "NLYS97 Scores 1997",
+          col = "orange",
+          border = "brown"
+          #horizontal = TRUE,
+          #notch = TRUE
+  )
+
+drinking_problem_score_plot
+
 
 # Descriptive Stats for entire year 2000 
-subAbuse2000Mean = mean(nylsData$Substance2000  ,na.rm=TRUE)
+subAbuse2000Mean = mean(nylsData$Substance2000, na.rm=TRUE)
 subAbuse2000StDev = sd(nylsData$Substance2000  ,na.rm=TRUE)
 print (paste("2000 NLSY97 Substance Use Index Score Mean: ", subAbuse2000Mean))
 print (paste("2000 NLSY97 Substance Use Index Score St. Dev: ", subAbuse2000StDev))
 summary(nylsData$Substance2000)
+plyr::count(nylsData, 'Substance2000')
+
 
 
 ############# NON-WHITES SUBSET of Data Set
@@ -62,6 +76,8 @@ subAbuse1997NonWhiteStDev = sd(nonWhitesSubset$Substance1997 ,na.rm=TRUE)
 print (paste("1997 NLSY97 Substance Use Index Score Mean, Non-Whites only: ", subAbuse1997NonWhiteMean))
 print (paste("1997 NLSY97 Substance Use Index Score St. Dev, Non-Whites only: ", subAbuse1997NonWhiteStDev))
 summary(nonWhitesSubset$Substance1997)
+plyr::count(nonWhitesSubset, 'Substance1997')
+
 
 
 subAbuse2000NonWhiteMean = mean(nonWhitesSubset$Substance2000  ,na.rm=TRUE)
@@ -69,6 +85,7 @@ subAbuse2000NonWhiteStDev = sd(nonWhitesSubset$Substance2000 ,na.rm=TRUE)
 print (paste("2000 NLSY97 Substance Use Index Score Mean, Non-Whites only: ", subAbuse2000NonWhiteMean))
 print (paste("2000 NLSY97 Substance Use Index Score St. Dev, Non-Whites only: ", subAbuse2000NonWhiteStDev))
 summary(nonWhitesSubset$Substance2000)
+plyr::count(nonWhitesSubset, 'Substance2000')
 
 
 ############# WHITES SUBSET of Data Set
@@ -76,16 +93,19 @@ WhitesSubset = subset(nylsData, Race=="1")
 
 subAbuse1997WhiteMean = mean(WhitesSubset$Substance1997  ,na.rm=TRUE)
 subAbuse1997WhiteStDev = sd(WhitesSubset$Substance1997 ,na.rm=TRUE)
-print (paste("1997 NLSY97 Substance Use Index Score Mean, Non-Whites only: ", subAbuse1997WhiteMean))
-print (paste("1997 NLSY97 Substance Use Index Score St. Dev, Non-Whites only: ", subAbuse1997WhiteStDev))
+print (paste("1997 NLSY97 Substance Use Index Score Mean, Whites only: ", subAbuse1997WhiteMean))
+print (paste("1997 NLSY97 Substance Use Index Score St. Dev, Whites only: ", subAbuse1997WhiteStDev))
 summary(WhitesSubset$Substance1997)
+plyr::count(WhitesSubset, 'Substance1997')
 
 
 subAbuse2000WhiteMean = mean(WhitesSubset$Substance2000  ,na.rm=TRUE)
 subAbuse2000WhiteStDev = sd(WhitesSubset$Substance2000 ,na.rm=TRUE)
-print (paste("2000 NLSY97 Substance Use Index Score Mean, Non-Whites only: ", subAbuse2000WhiteMean))
-print (paste("2000 NLSY97 Substance Use Index Score St. Dev, Non-Whites only: ", subAbuse2000WhiteStDev))
+print (paste("2000 NLSY97 Substance Use Index Score Mean, Whites only: ", subAbuse2000WhiteMean))
+print (paste("2000 NLSY97 Substance Use Index Score St. Dev, Whites only: ", subAbuse2000WhiteStDev))
 summary(WhitesSubset$Substance2000)
+plyr::count(WhitesSubset, 'Substance2000')
+
 
 nylsData <- nylsData %>% 
   mutate(SubAbuseDelta = (Substance2000-Substance1997))
