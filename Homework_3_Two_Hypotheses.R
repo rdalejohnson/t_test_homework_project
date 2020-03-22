@@ -109,6 +109,22 @@ print (paste("Differences Scores SD.  for ALL respondents: ", differencesScoresA
 summary(subAbuseDifferencesDataSetCleaned$SubAbuseDelta)
 plyr::count(subAbuseDifferencesDataSetCleaned, 'SubAbuseDelta')
 
+####### NORMALITY TESTING for DIFFERENCES DATA SET ############
+histgram.differencesALL = hist(subAbuseDifferencesDataSetCleaned$SubAbuseDelta  , 
+                               main="a histogram of the difference") 
+ks.test(x=subAbuseDifferencesDataSetCleaned$SubAbuseDelta, "pnorm", 
+        mean=differencesScoresAllMean, sd=differencesScoresAllStDev)
+shapiro.test(subAbuseDifferencesDataSetCleaned$SubAbuseDelta)
+qqnorm(subAbuseDifferencesDataSetCleaned$SubAbuseDelta)
+qqline(subAbuseDifferencesDataSetCleaned$SubAbuseDelta)
+library(ggpubr)
+ggqqplot(subAbuseDifferencesDataSetCleaned$SubAbuseDelta)
+#### NOT NORMAL using any of these tests; invoking the CLT for paired t-test.
+t.test(subAbuseDifferencesDataSetCleaned$SubAbuseDelta, mu=0, alternative="two.sided")
+
+
+
+#### NONWHITE SUBSET OF DIFFERENCES SCORES ####
 subAbuseDifferencesNONWHITEDataSetCleaned = subset(subAbuseDifferencesDataSetCleaned, Race=="0")
 differencesScoresNONWHITEMean = mean(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta  ,na.rm=TRUE)
 differencesScoresNONWHITEStDev = sd(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta   ,na.rm=TRUE)
@@ -117,7 +133,19 @@ print (paste("Differences Scores SD.  for NONWHITE respondents: ", differencesSc
 summary(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta)
 plyr::count(subAbuseDifferencesNONWHITEDataSetCleaned, 'SubAbuseDelta')
 
+##### NORMALITY TESTING for NONWHITE DIFFERENCES SCORES
+histgram.differencesNONWHITE = hist(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta  , 
+                               main="a histogram of the difference") 
+ks.test(x=subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta, "pnorm", 
+        mean=differencesScoresAllMean, sd=differencesScoresAllStDev)
+shapiro.test(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta)
+qqnorm(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta)
+qqline(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta)
+library(ggpubr)
+ggqqplot(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta)
 
+
+#### WHITE SUBSET OF DIFFERENCES SCORES ####
 subAbuseDifferencesWHITEDataSetCleaned = subset(subAbuseDifferencesDataSetCleaned, Race=="1")
 differencesScoresWHITEMean = mean(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta  ,na.rm=TRUE)
 differencesScoresWHITEStDev = sd(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta   ,na.rm=TRUE)
@@ -126,6 +154,27 @@ print (paste("Differences Scores SD.  for NONWHITE respondents: ", differencesSc
 summary(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta)
 plyr::count(subAbuseDifferencesWHITEDataSetCleaned, 'SubAbuseDelta')
 
+##### NORMALITY TESTING for NONWHITE DIFFERENCES SCORES
+histgram.differencesWHITE = hist(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta  , 
+                                    main="a histogram of the difference") 
+ks.test(x=subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta, "pnorm", 
+        mean=differencesScoresAllMean, sd=differencesScoresAllStDev)
+shapiro.test(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta)
+qqnorm(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta)
+qqline(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta)
+library(ggpubr)
+ggqqplot(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta)
+
+library(car)
+bartlett.test(x=subAbuseDifferencesDataSetCleaned$SubAbuseDelta, subAbuseDifferencesDataSetCleaned$Race)
+leveneTest(subAbuseDifferencesDataSetCleaned$SubAbuseDelta, subAbuseDifferencesDataSetCleaned$Race)
+fligner.test(subAbuseDifferencesDataSetCleaned$SubAbuseDelta, subAbuseDifferencesDataSetCleaned$Race)
+
+t.test(x=subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta, y=subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta, 
+       mu=0, alternative="two.sided")
+
+
+### TRASH BELOW THIS LINE ###
 
 histgram.delta=hist(subAbuseDifferencesDataSetCleaned$SubAbuseDelta  , main="a histogram of the difference") 
 
