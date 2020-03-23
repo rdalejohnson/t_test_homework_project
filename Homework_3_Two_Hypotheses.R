@@ -48,6 +48,8 @@ print (paste("1997 YEAR NLSY97 Score SD.  for ALL respondents: ", subAbuse1997St
 summary(nylsData$Substance1997)
 plyr::count(nylsData, 'Substance1997')
 
+###############  Descriptive Stats for entire year 2000 ####################
+
 #Exclude NAs in year 2000 data set
 subAbuse2000Cleaned = subset(nylsData, !is.na(Substance2000))
 ###############   Descriptive Stats for entire year 2000 ###############  
@@ -122,6 +124,10 @@ ggqqplot(subAbuseDifferencesDataSetCleaned$SubAbuseDelta)
 #### NOT NORMAL using any of these tests; invoking the CLT for paired t-test.
 t.test(subAbuseDifferencesDataSetCleaned$SubAbuseDelta, mu=0, alternative="two.sided")
 
+##### HYPOTHESIS 2 **********************************************************************************
+##### HYPOTHESIS 2 **********************************************************************************
+##### HYPOTHESIS 2 **********************************************************************************
+##### HYPOTHESIS 2 **********************************************************************************
 
 
 #### NONWHITE SUBSET OF DIFFERENCES SCORES ####
@@ -171,7 +177,38 @@ leveneTest(subAbuseDifferencesDataSetCleaned$SubAbuseDelta, subAbuseDifferencesD
 fligner.test(subAbuseDifferencesDataSetCleaned$SubAbuseDelta, subAbuseDifferencesDataSetCleaned$Race)
 
 t.test(x=subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta, y=subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta, 
-       mu=0, alternative="two.sided")
+       mu=0, alternative="two.sided", var.equal=TRUE)
+
+
+##############   CHECKING NONWHITES FOR SCORES DIFFERENCES ***********************************************
+
+histgram.differencesALL = hist(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta  , 
+                               main="a histogram of the difference") 
+ks.test(x=subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta, "pnorm", 
+        mean=differencesScoresAllMean, sd=differencesScoresAllStDev)
+shapiro.test(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta)
+qqnorm(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta)
+qqline(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta)
+library(ggpubr)
+ggqqplot(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta)
+##PAIRED T-TEST FOR NONWHITE Differences
+t.test(subAbuseDifferencesNONWHITEDataSetCleaned$SubAbuseDelta, mu=0, alternative="two.sided")
+
+##############   CHECKING WHITES FOR SCORES DIFFERENCES ***********************************************
+
+
+histgram.differencesALL = hist(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta  , 
+                               main="a histogram of the difference") 
+ks.test(x=subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta, "pnorm", 
+        mean=differencesScoresAllMean, sd=differencesScoresAllStDev)
+shapiro.test(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta)
+qqnorm(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta)
+qqline(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta)
+library(ggpubr)
+ggqqplot(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta)
+##PAIRED T-TEST FOR NONWHITE Differences
+t.test(subAbuseDifferencesWHITEDataSetCleaned$SubAbuseDelta, mu=0, alternative="two.sided")
+
 
 
 ### TRASH BELOW THIS LINE ###
